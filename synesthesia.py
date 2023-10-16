@@ -1,3 +1,16 @@
+# simple drop-in variant
+def colorize(x):
+    import hashlib
+    r, g, b, *_ = hashlib.sha256(bytes(repr(x), 'utf-8')).digest()
+    r /= 255
+    g /= 255
+    b /= 255
+    if r < 0.5 and g < 0.5 and b < 0.5:
+        r = 1 - r
+        g = 1 - g
+        b = 1 - b
+    return r, g, b
+
 class Color:
     def __init__(self, *args):
         if len(args) == 0:
